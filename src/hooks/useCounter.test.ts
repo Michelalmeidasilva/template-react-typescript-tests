@@ -1,4 +1,5 @@
 import { renderHook } from '@testing-library/react-hooks';
+import { useEffect } from 'react';
 import { act } from 'react-test-renderer';
 import useCounter from './useCounter';
 
@@ -50,19 +51,18 @@ test('should reset counter to updated initial value', () => {
   expect(result.current.value).toBe(10);
 });
 
+
 test('should reset counter to updated initial value', () => {
-  const { result, rerender } = renderHook(
-    ({ initialValue }) => useCounter(initialValue),
-    {
-      initialProps: { initialValue: 0 }
-    }
-  );
+  const { result, rerender } = renderHook(({initialValue}) => useCounter(initialValue), {
+    initialProps: { initialValue: 0 }
+  })
 
-  rerender({ initialValue: 10 });
-
+  rerender({initialValue : 10})
+  
   act(() => {
-    result.current.reset();
-  });
+    result.current.reset()
+  })
 
-  expect(result.current.value).toBe(10);
-});
+  expect(result.current.value).toBe(10)
+})
+
